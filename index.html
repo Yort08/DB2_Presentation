@@ -334,7 +334,31 @@
             padding: 0.3rem 0.8rem;
         }
 
-        /* 📍 LOWER-LEFT BACK TO SLIDE 3 BUTTON STYLING */
+        /* 📍 NAVIGATION BUTTON STYLING */
+        .btn-slide-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: linear-gradient(135deg, rgba(0, 168, 98, 0.25), rgba(15, 26, 46, 0.95));
+            border: 2px solid var(--sb-light-green);
+            color: #ffffff;
+            padding: 0.95rem 2rem;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 5px 20px rgba(0, 168, 98, 0.35);
+            margin-top: 1.8rem;
+        }
+
+        .btn-slide-nav:hover {
+            background: var(--sb-light-green);
+            color: #ffffff;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 168, 98, 0.7);
+        }
+
         .btn-back-to-slide {
             display: inline-flex;
             align-items: center;
@@ -416,10 +440,10 @@
         .zoom-modal-title { font-family: 'Outfit', sans-serif; font-size: 3.2rem; font-weight: 900; color: #ffffff; margin-bottom: 1.5rem; }
         .zoom-modal-body { font-size: 1.8rem; line-height: 1.8; color: #f8fafc; }
 
-        /* Tables */
-        .table-responsive {
-            max-height: 460px;
-            overflow-y: auto;
+        /* ✨ FULL TABLE WITHOUT INNER SCROLLBAR */
+        .table-responsive-full {
+            width: 100%;
+            overflow: visible;
             border: 1.5px solid var(--border);
             border-radius: var(--radius-md);
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
@@ -428,24 +452,21 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             text-align: left;
         }
 
         th {
-            position: sticky;
-            top: 0;
             background: #080e1a;
             color: var(--accent-cyan);
-            padding: 1.25rem 1.5rem;
+            padding: 0.85rem 1.25rem;
             font-weight: 800;
             border-bottom: 3px solid var(--border);
-            z-index: 10;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
 
         td {
-            padding: 1.15rem 1.5rem;
+            padding: 0.75rem 1.25rem;
             border-bottom: 1px solid rgba(255,255,255,0.07);
             color: #cbd5e1;
             transition: all 0.2s ease;
@@ -459,9 +480,9 @@
 
         .badge {
             display: inline-block;
-            padding: 0.35rem 0.85rem;
+            padding: 0.25rem 0.75rem;
             border-radius: 8px;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: 800;
         }
         .badge-danger { background: rgba(239, 68, 68, 0.3); color: #fca5a5; }
@@ -761,16 +782,16 @@ df = pd.read_excel("StarBucksNutritionFacts.csv.xlsx")
 print(f"Acquired Dataset Shape: {df.shape[0]} rows x {df.shape[1]} columns")</pre>
         </div>
 
-        <!-- Slide 3 -->
+        <!-- Slide 3 (WITH FULL TABLE & "GO TO SLIDE 6" BUTTON) -->
         <div class="slide" id="slide-3">
             <div class="slide-tag">📊 Slide 3 of 8</div>
             <h2>Present Dataset (Raw Overview)</h2>
 
-            <p style="color:var(--text-sub); font-size:1.35rem; margin-bottom: 1.5rem;">
+            <p style="color:var(--text-sub); font-size:1.25rem; margin-bottom: 1rem;">
                 Raw Dataset Dimensions: <strong>242 rows &times; 18 columns</strong> (3 Categorical, 15 Nutritional Numerical)
             </p>
 
-            <div class="table-responsive">
+            <div class="table-responsive-full">
                 <table>
                     <thead>
                         <tr>
@@ -795,6 +816,13 @@ print(f"Acquired Dataset Shape: {df.shape[0]} rows x {df.shape[1]} columns")</pr
                         <tr><td>18</td><td>Caffeine (mg)</td><td>object</td><td><span class="badge badge-danger">'Varies' & NaN</span></td><td>Contains 1 explicit NaN and 22 implicit text 'Varies'</td></tr>
                     </tbody>
                 </table>
+            </div>
+
+            <!-- BUTTON TO GO DIRECTLY TO SLIDE 6 -->
+            <div style="display: flex; justify-content: flex-start;">
+                <button class="btn-slide-nav" onclick="goToSlide(6)">
+                    ➜ Go to Slide 6 (Post-Cleaned Data Summary)
+                </button>
             </div>
         </div>
 
@@ -905,7 +933,7 @@ for col in numeric_columns:
     df[col] = df[col].fillna(df[col].median())</pre>
         </div>
 
-        <!-- Slide 6 (WITH LOWER-LEFT "BACK TO SLIDE 3" BUTTON) -->
+        <!-- Slide 6 -->
         <div class="slide" id="slide-6">
             <div class="slide-tag">✨ Slide 6 of 8</div>
             <h2>After Cleaning (Post-Cleaned Data)</h2>
@@ -929,7 +957,7 @@ for col in numeric_columns:
                 </div>
             </div>
 
-            <div class="table-responsive">
+            <div class="table-responsive-full">
                 <table>
                     <thead>
                         <tr>
@@ -953,7 +981,6 @@ for col in numeric_columns:
                 </table>
             </div>
 
-            <!-- LOWER-LEFT BACK TO SLIDE 3 BUTTON -->
             <div style="display: flex; justify-content: flex-start;">
                 <button class="btn-back-to-slide" onclick="goToSlide(3)">
                     ↩ Back to Slide 3 (Raw Dataset Overview)
