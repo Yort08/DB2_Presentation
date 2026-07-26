@@ -175,15 +175,14 @@
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.2rem; }
         .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.8rem; }
 
-        /* Focus Dimming Container */
         .focus-container {
             position: relative;
         }
 
-        /* ✨ HIGH IMPACT FOCUS SPOTLIGHT EFFECT ON CARDS */
+        /* Cards */
         .card {
             position: relative;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.04);
             border: 1.5px solid var(--border);
             border-radius: var(--radius-md);
             padding: 2.2rem;
@@ -192,7 +191,6 @@
             cursor: pointer;
         }
 
-        /* Radial Cursor Spotlight Glow */
         .card::before {
             content: '';
             position: absolute;
@@ -207,20 +205,16 @@
             pointer-events: none;
         }
 
-        .card:hover::before {
-            opacity: 1;
-        }
+        .card:hover::before { opacity: 1; }
 
-        /* Active Focus Effect: Scale, Glow & Spotlight */
-        .card:hover, .card.focused {
-            background: rgba(255, 255, 255, 0.07);
+        .card:hover {
+            background: rgba(255, 255, 255, 0.08);
             border-color: var(--sb-light-green);
             transform: scale(1.03) translateY(-6px);
-            box-shadow: 0 15px 40px -10px rgba(0, 168, 98, 0.5), 0 0 25px rgba(0, 168, 98, 0.3);
+            box-shadow: 0 15px 40px -10px rgba(0, 168, 98, 0.5);
             z-index: 10;
         }
 
-        /* Sibling Dimming Focus Effect */
         .focus-container:hover .card:not(:hover) {
             opacity: 0.45;
             filter: blur(1px);
@@ -233,10 +227,9 @@
         .card-desc strong { color: #ffffff; font-weight: 700; }
         .card-desc code { font-size: 1.2rem; color: var(--accent-cyan); background: rgba(0,0,0,0.4); padding: 0.25rem 0.6rem; border-radius: 6px; }
 
-        /* Stat Cards Focus Effect */
         .stat-card {
-            background: linear-gradient(145deg, rgba(0, 112, 74, 0.2), rgba(15, 26, 46, 0.95));
-            border: 2px solid rgba(0, 112, 74, 0.4);
+            background: linear-gradient(145deg, rgba(0, 112, 74, 0.25), rgba(15, 26, 46, 0.95));
+            border: 2px solid rgba(0, 112, 74, 0.5);
             padding: 2.2rem 1.5rem;
             border-radius: var(--radius-md);
             text-align: center;
@@ -268,39 +261,159 @@
             margin-top: 0.8rem;
         }
 
-        /* Glowing Focus Tabs */
+        /* 🔍 Dynamic Zoom-In Tab Buttons & Animated Content */
         .tab-buttons {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 1.2rem;
+            margin-bottom: 2.2rem;
             border-bottom: 2px solid var(--border);
-            padding-bottom: 0.85rem;
+            padding-bottom: 1rem;
         }
 
         .tab-btn {
-            background: transparent;
-            border: 1.5px solid transparent;
+            background: rgba(255, 255, 255, 0.04);
+            border: 2px solid var(--border);
             color: var(--text-muted);
-            padding: 1rem 1.8rem;
-            border-radius: 12px;
+            padding: 1.1rem 2.2rem;
+            border-radius: 14px;
             font-weight: 800;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .tab-btn:hover { color: #ffffff; background: rgba(255,255,255,0.08); }
-        
+        .tab-btn:hover {
+            color: #ffffff;
+            border-color: var(--accent-cyan);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.3);
+        }
+
+        /* ✨ ACTIVE TAB ZOOM EFFECT: Makes Active Tab Button & Content POP OUT BIGGER */
         .tab-btn.active {
             background: var(--sb-green);
             color: #ffffff;
             border-color: var(--sb-light-green);
-            box-shadow: 0 0 25px rgba(0, 168, 98, 0.6);
-            transform: scale(1.04);
+            box-shadow: 0 0 35px rgba(0, 168, 98, 0.7);
+            transform: scale(1.08) translateY(-4px);
         }
 
-        .tab-content { display: none; animation: focusPulse 0.4s ease; }
-        .tab-content.active { display: block; }
+        .tab-content {
+            display: none;
+            opacity: 0;
+            transform: scale(0.95) translateY(15px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .tab-content.active {
+            display: block;
+            opacity: 1;
+            transform: scale(1.02) translateY(0); /* Zoom In Enlarged Scale */
+            animation: zoomInContent 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* ZOOM IN ZOOMED CARD CONTAINER */
+        .zoomed-content-card {
+            background: linear-gradient(145deg, rgba(0, 112, 74, 0.15) 0%, rgba(13, 22, 39, 0.95) 100%);
+            border: 2.5px solid var(--sb-light-green);
+            border-radius: var(--radius-lg);
+            padding: 3rem 3.5rem;
+            box-shadow: 0 20px 50px rgba(0, 168, 98, 0.35);
+        }
+
+        .zoomed-content-card .card-title {
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin-bottom: 1.25rem;
+        }
+
+        .zoomed-content-card .card-desc {
+            font-size: 1.6rem;
+            line-height: 1.8;
+            color: #f1f5f9;
+        }
+
+        .zoomed-content-card .card-desc code {
+            font-size: 1.4rem;
+            padding: 0.3rem 0.8rem;
+        }
+
+        /* Fullscreen Interactive Zoom Modal Overlay */
+        .zoom-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(4, 8, 18, 0.92);
+            backdrop-filter: blur(25px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .zoom-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .zoom-modal-box {
+            background: linear-gradient(145deg, rgba(0, 112, 74, 0.2) 0%, rgba(15, 26, 46, 0.98) 100%);
+            border: 3px solid var(--sb-light-green);
+            border-radius: var(--radius-lg);
+            padding: 4rem 5rem;
+            max-width: 1100px;
+            width: 90vw;
+            box-shadow: 0 0 80px rgba(0, 168, 98, 0.6);
+            transform: scale(0.85);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .zoom-modal.active .zoom-modal-box {
+            transform: scale(1.05);
+        }
+
+        .zoom-modal-close {
+            position: absolute;
+            top: 2rem;
+            right: 2.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border);
+            color: #ffffff;
+            font-size: 1.8rem;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .zoom-modal-close:hover {
+            background: #ef4444;
+            transform: scale(1.1);
+        }
+
+        .zoom-modal-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+        }
+
+        .zoom-modal-body {
+            font-size: 1.8rem;
+            line-height: 1.8;
+            color: #f8fafc;
+        }
 
         /* Tables */
         .table-responsive {
@@ -350,9 +463,9 @@
             font-size: 1.05rem;
             font-weight: 800;
         }
-        .badge-danger { background: rgba(239, 68, 68, 0.3); color: #fca5a5; box-shadow: 0 0 10px rgba(239, 68, 68, 0.3); }
-        .badge-warning { background: rgba(245, 158, 11, 0.3); color: #fde047; box-shadow: 0 0 10px rgba(245, 158, 11, 0.3); }
-        .badge-success { background: rgba(16, 185, 129, 0.3); color: #6ee7b7; box-shadow: 0 0 10px rgba(16, 185, 129, 0.3); }
+        .badge-danger { background: rgba(239, 68, 68, 0.3); color: #fca5a5; }
+        .badge-warning { background: rgba(245, 158, 11, 0.3); color: #fde047; }
+        .badge-success { background: rgba(16, 185, 129, 0.3); color: #6ee7b7; }
 
         pre {
             background: #040711;
@@ -365,13 +478,6 @@
             overflow-x: auto;
             margin-top: 1.5rem;
             line-height: 1.7;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: border-color 0.3s ease;
-        }
-
-        pre:hover {
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.3);
         }
 
         /* Controls Bar */
@@ -429,7 +535,7 @@
             transform: none !important;
         }
 
-        /* Side Menu Overlay */
+        /* Side Menu */
         .menu-overlay {
             position: fixed;
             top: 75px;
@@ -495,7 +601,6 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 1.5rem;
             letter-spacing: -2px;
-            filter: drop-shadow(0 0 30px rgba(52, 211, 153, 0.4));
         }
 
         .thank-you-subtitle {
@@ -507,9 +612,9 @@
             line-height: 1.5;
         }
 
-        @keyframes focusPulse {
-            0% { opacity: 0; transform: scale(0.97) translateY(10px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
+        @keyframes zoomInContent {
+            0% { opacity: 0; transform: scale(0.92) translateY(20px); }
+            100% { opacity: 1; transform: scale(1.03) translateY(0); }
         }
 
         @keyframes bounce {
@@ -551,6 +656,15 @@
         <div class="menu-item" onclick="goToSlide(8)"><span>8.</span> 🎉 Thank You!</div>
     </div>
 
+    <!-- Zoom Modal Popup Overlay -->
+    <div class="zoom-modal" id="zoom-modal">
+        <div class="zoom-modal-box">
+            <div class="zoom-modal-close" onclick="closeZoomModal()">✕</div>
+            <div class="zoom-modal-title" id="zoom-modal-title">Zoomed Feature</div>
+            <div class="zoom-modal-body" id="zoom-modal-body">Detailed information zoomed in...</div>
+        </div>
+    </div>
+
     <main class="viewport">
 
         <!-- Slide 1 -->
@@ -558,9 +672,9 @@
             <div class="slide-tag">📍 Slide 1 of 8</div>
             <h2>Starbucks Beverage Nutrition Facts</h2>
             
-            <div class="grid-2 focus-container">
+            <div class="grid-2">
                 <div>
-                    <div class="card" style="margin-bottom: 1.8rem;">
+                    <div class="card" onclick="openZoomModal('Dataset Title & Scope', 'Nutritional profiling of <strong>Starbucks Handcrafted Beverages</strong> across 9 distinct beverage categories and multiple milk/size preparations.')" style="margin-bottom: 1.8rem;">
                         <div class="card-icon">☕</div>
                         <div class="card-title">Dataset Title & Scope</div>
                         <p class="card-desc">
@@ -568,7 +682,7 @@
                         </p>
                     </div>
 
-                    <div class="card">
+                    <div class="card" onclick="openZoomModal('File Information', '<strong>Source File:</strong> StarBucksNutritionFacts.csv.xlsx<br><br><strong>Cleaned File:</strong> Starbucks_Nutrition_Facts_Cleaned.csv<br><br><strong>Notebook:</strong> Starbucks_Data_Cleaning_and_Analysis.ipynb')">
                         <div class="card-icon">📂</div>
                         <div class="card-title">File Information</div>
                         <p class="card-desc">
@@ -580,19 +694,19 @@
                 </div>
 
                 <div class="grid-2 focus-container" style="grid-template-columns: 1fr 1fr;">
-                    <div class="stat-card">
+                    <div class="stat-card" onclick="openZoomModal('242 Total Beverage Rows', 'The dataset contains 242 unique drink recipe variations across size and milk preparations.')">
                         <div class="stat-num">242</div>
                         <div class="stat-label">Total Beverage Rows</div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card" onclick="openZoomModal('18 Nutritional Features', 'Includes Calories, Total Fat, Trans Fat, Saturated Fat, Sodium, Carbohydrates, Fiber, Sugars, Protein, Caffeine, and Micronutrients.')">
                         <div class="stat-num">18</div>
                         <div class="stat-label">Nutritional Features</div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card" onclick="openZoomModal('9 Drink Categories', 'Coffee, Classic Espresso, Signature Espresso, Frappuccino Blended Coffee, Frappuccino Light, Frappuccino Crème, Tazo Tea, Shaken Iced Beverages, Smoothies.')">
                         <div class="stat-num">9</div>
                         <div class="stat-label">Drink Categories</div>
                     </div>
-                    <div class="stat-card">
+                    <div class="stat-card" onclick="openZoomModal('100% Data Types Cleaned', 'All features converted to clean numeric float64/int64 with 0 nulls.')">
                         <div class="stat-num">100%</div>
                         <div class="stat-label">Data Types Cleaned</div>
                     </div>
@@ -606,7 +720,7 @@
             <h2>How the Data Was Acquired</h2>
 
             <div class="grid-3 focus-container" style="margin-bottom: 2rem;">
-                <div class="card">
+                <div class="card" onclick="openZoomModal('1. Public Menu Source', 'Extracted from <strong>Starbucks Corporation's official Nutritional Guidance menu disclosures</strong> published on Kaggle.')">
                     <div class="card-icon">🌐</div>
                     <div class="card-title">1. Public Menu Source</div>
                     <p class="card-desc">
@@ -614,7 +728,7 @@
                     </p>
                 </div>
 
-                <div class="card">
+                <div class="card" onclick="openZoomModal('2. Google Colab Ingestion', 'Uploaded interactively in Google Colab using:<br><br><code>from google.colab import files</code><br><code>uploaded = files.upload()</code>')">
                     <div class="card-icon">☁️</div>
                     <div class="card-title">2. Google Colab Ingestion</div>
                     <p class="card-desc">
@@ -624,7 +738,7 @@
                     </p>
                 </div>
 
-                <div class="card">
+                <div class="card" onclick="openZoomModal('3. Pandas Integration', 'Parsed directly into DataFrame via:<br><br><code>df = pd.read_excel('StarBucksNutritionFacts.csv.xlsx')</code>')">
                     <div class="card-icon">⚡</div>
                     <div class="card-title">3. Pandas Integration</div>
                     <p class="card-desc">
@@ -683,68 +797,69 @@ print(f"Acquired Dataset Shape: {df.shape[0]} rows x {df.shape[1]} columns")</pr
             </div>
         </div>
 
-        <!-- Slide 4: Processes Used to Clean Data (WITH HIGH-IMPACT FOCUS EFFECT) -->
+        <!-- Slide 4: Processes Used to Clean Data (WITH INTERACTIVE ZOOM ON CLICKING TAB BUTTON 1, 2, 3, 4) -->
         <div class="slide" id="slide-4">
             <div class="slide-tag">🧹 Slide 4 of 8</div>
             <h2>Processes Used to Clean the Data</h2>
 
             <div class="tab-buttons">
-                <button class="tab-btn active" onclick="switchTab(event, 'tab-missing')">1. Missing Data Audit</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-typos')">2. Typo Fix ('3 2')</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-duplicates')">3. Duplicate Verification</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-headers')">4. Whitespace Trimming</button>
+                <button class="tab-btn active" onclick="switchTab(event, 'tab-missing')">1. Missing Data Audit 🔍</button>
+                <button class="tab-btn" onclick="switchTab(event, 'tab-typos')">2. Typo Fix ('3 2') 🔍</button>
+                <button class="tab-btn" onclick="switchTab(event, 'tab-duplicates')">3. Duplicate Verification 🔍</button>
+                <button class="tab-btn" onclick="switchTab(event, 'tab-headers')">4. Whitespace Trimming 🔍</button>
             </div>
 
+            <!-- Tab 1 Zoomed In View -->
             <div class="tab-content active" id="tab-missing">
                 <div class="grid-2 focus-container">
-                    <div class="card">
-                        <div class="card-title">Explicit Missing Value (NaN)</div>
+                    <div class="zoomed-content-card" onclick="openZoomModal('1. Explicit Missing Value (NaN)', 'Audited via <code>df.isnull().sum()</code>.<br><br>Identified <strong>1 explicit NaN</strong> in <code>Caffeine (mg)</code> at Row 158 (Iced Black Tea Chai Latte).')">
+                        <div class="card-title">🔍 Explicit Missing Value (NaN)</div>
                         <p class="card-desc">
-                            Audited via <code>df.isnull().sum()</code>. Identified <strong>1 explicit NaN</strong> in <code>Caffeine (mg)</code> at Row 158 (Iced Black Tea Chai Latte).
+                            Audited via <code>df.isnull().sum()</code>.<br><br>
+                            Identified <strong>1 explicit NaN</strong> in <code>Caffeine (mg)</code> at Row 158 (Iced Black Tea Chai Latte).
                         </p>
                     </div>
-                    <div class="card">
-                        <div class="card-title">Implicit Text Placeholders ("Varies")</div>
+
+                    <div class="zoomed-content-card" onclick="openZoomModal('1. Implicit Text Placeholders (&quot;Varies&quot;)', 'Audited string entries.<br><br>Discovered <strong>22 rows</strong> with string placeholders <code>&quot;Varies&quot;</code> (13) and <code>&quot;varies&quot;</code> (9) in <code>Caffeine (mg)</code>.')">
+                        <div class="card-title">🔍 Implicit Text Placeholders ("Varies")</div>
                         <p class="card-desc">
-                            Audited string entries. Discovered <strong>22 rows</strong> with string placeholders <code>"Varies"</code> (13) and <code>"varies"</code> (9) in <code>Caffeine (mg)</code>.
+                            Audited string entries.<br><br>
+                            Discovered <strong>22 rows</strong> with string placeholders <code>"Varies"</code> (13) and <code>"varies"</code> (9) in <code>Caffeine (mg)</code>.
                         </p>
                     </div>
                 </div>
             </div>
 
+            <!-- Tab 2 Zoomed In View -->
             <div class="tab-content" id="tab-typos">
-                <div class="grid-1 focus-container">
-                    <div class="card">
-                        <div class="card-title">Typographical Format Error in Total Fat (g)</div>
-                        <p class="card-desc">
-                            Row 237 contained string <code>'3 2'</code> (space entered instead of decimal point <code>.</code>). This caused Pandas to read the entire column as <code>object</code> text.<br><br>
-                            <strong>Fix:</strong> Replaced <code>'3 2'</code> with <code>'3.2'</code> and converted column to <code>float64</code>.
-                        </p>
-                    </div>
+                <div class="zoomed-content-card" onclick="openZoomModal('2. Typographical Format Error in Total Fat (g)', 'Row 237 contained string <code>'3 2'</code> (space entered instead of decimal point <code>.</code>).<br><br><strong>Fix Applied:</strong> Replaced <code>'3 2'</code> with <code>'3.2'</code> and converted column to numeric float64.')">
+                    <div class="card-title">🔍 Typographical Format Error in Total Fat (g)</div>
+                    <p class="card-desc">
+                        Row 237 contained string <code>'3 2'</code> (space entered instead of decimal point <code>.</code>). This caused Pandas to read the entire column as <code>object</code> text.<br><br>
+                        <strong>Fix Applied:</strong> Replaced <code>'3 2'</code> with <code>'3.2'</code> and converted column to numerical <code>float64</code>.
+                    </p>
                 </div>
             </div>
 
+            <!-- Tab 3 Zoomed In View -->
             <div class="tab-content" id="tab-duplicates">
-                <div class="grid-1 focus-container">
-                    <div class="card">
-                        <div class="card-title">Duplicate Row & Recipe Check</div>
-                        <p class="card-desc">
-                            Ran <code>df.duplicated().sum()</code> &rarr; <strong>0 exact duplicate rows</strong>.<br><br>
-                            Verified recipe combinations of (<code>Beverage_category</code>, <code>Beverage</code>, <code>Beverage_prep</code>). Confirmed all 242 rows represent distinct valid menu items.
-                        </p>
-                    </div>
+                <div class="zoomed-content-card" onclick="openZoomModal('3. Duplicate Row & Recipe Check', 'Ran <code>df.duplicated().sum()</code> &rarr; <strong>0 exact duplicate rows</strong>.<br><br>Verified recipe combinations of (Beverage_category, Beverage, Beverage_prep). Confirmed all 242 rows represent distinct valid menu items.')">
+                    <div class="card-title">🔍 Duplicate Row & Recipe Check</div>
+                    <p class="card-desc">
+                        Ran <code>df.duplicated().sum()</code> &rarr; <strong>0 exact duplicate rows</strong>.<br><br>
+                        Verified recipe combinations of (<code>Beverage_category</code>, <code>Beverage</code>, <code>Beverage_prep</code>). Confirmed all 242 rows represent distinct valid menu items.
+                    </p>
                 </div>
             </div>
 
+            <!-- Tab 4 Zoomed In View -->
             <div class="tab-content" id="tab-headers">
-                <div class="grid-1 focus-container">
-                    <div class="card">
-                        <div class="card-title">Whitespace Pollution Removal</div>
-                        <p class="card-desc">
-                            Column headers contained irregular padding spaces (e.g. <code>' Total Fat (g)'</code>).<br><br>
-                            <strong>Fix:</strong> Executed <code>df.columns = df.columns.str.strip()</code> and trimmed all categorical string columns.
-                        </p>
-                    </div>
+                <div class="zoomed-content-card" onclick="openZoomModal('4. Whitespace Pollution Removal', 'Column headers contained irregular padding spaces (e.g. <code>' Total Fat (g)'</code>).<br><br><strong>Fix Applied:</strong> Executed <code>df.columns = df.columns.str.strip()</code> and trimmed all categorical string columns.')">
+                    <div class="card-title">🔍 Whitespace Pollution Removal</div>
+                    <p class="card-desc">
+                        Column headers contained irregular padding spaces (e.g. <code>' Total Fat (g)'</code>).<br><br>
+                        <strong>Fix Applied:</strong> Executed <code>df.columns = df.columns.str.strip()</code> and trimmed all categorical string columns.
+                    </p>
                 </div>
             </div>
         </div>
@@ -957,14 +1072,33 @@ for col in numeric_columns:
             document.getElementById('menu-overlay').classList.remove('active');
         }
 
+        /* 🔍 DYNAMIC TAB SWITCHING WITH ZOOM-IN SCALE ANIMATION */
         function switchTab(evt, tabId) {
             const container = evt.target.closest('.slide');
             container.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             container.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
 
             evt.target.classList.add('active');
-            container.querySelector('#' + tabId).classList.add('active');
+            const targetContent = container.querySelector('#' + tabId);
+            targetContent.classList.add('active');
         }
+
+        /* 🔍 FULLSCREEN ZOOM MODAL CONTROLS */
+        function openZoomModal(title, content) {
+            document.getElementById('zoom-modal-title').innerHTML = '🔍 ' + title;
+            document.getElementById('zoom-modal-body').innerHTML = content;
+            document.getElementById('zoom-modal').classList.add('active');
+        }
+
+        function closeZoomModal() {
+            document.getElementById('zoom-modal').classList.remove('active');
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeZoomModal();
+            }
+        });
 
         const dotsContainer = document.getElementById('dot-indicators');
         for (let i = 1; i <= totalSlides; i++) {
@@ -975,7 +1109,7 @@ for col in numeric_columns:
             dotsContainer.appendChild(dot);
         }
 
-        // ✨ Interactive Mouse Cursor Spotlight Tracking for Cards
+        // Spotlight mouse tracking
         document.addEventListener('mousemove', (e) => {
             document.querySelectorAll('.card').forEach(card => {
                 const rect = card.getBoundingClientRect();
