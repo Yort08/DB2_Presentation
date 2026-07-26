@@ -183,7 +183,7 @@
             background: rgba(255, 255, 255, 0.04);
             border: 1.5px solid var(--border);
             border-radius: var(--radius-md);
-            padding: 2.2rem;
+            padding: 2.5rem;
             transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             overflow: hidden;
             cursor: pointer;
@@ -220,8 +220,8 @@
         }
 
         .card-icon { font-size: 3rem; margin-bottom: 1.2rem; }
-        .card-title { font-size: 1.7rem; font-weight: 800; color: #ffffff; margin-bottom: 0.85rem; font-family: 'Outfit', sans-serif; }
-        .card-desc { font-size: 1.35rem; color: var(--text-sub); line-height: 1.7; }
+        .card-title { font-size: 1.8rem; font-weight: 800; color: #ffffff; margin-bottom: 0.85rem; font-family: 'Outfit', sans-serif; }
+        .card-desc { font-size: 1.4rem; color: var(--text-sub); line-height: 1.75; }
         .card-desc strong { color: #ffffff; font-weight: 700; }
         .card-desc code { font-size: 1.2rem; color: var(--accent-cyan); background: rgba(0,0,0,0.4); padding: 0.25rem 0.6rem; border-radius: 6px; }
 
@@ -334,7 +334,6 @@
             padding: 0.3rem 0.8rem;
         }
 
-        /* 📍 NAVIGATION BUTTON STYLING */
         .btn-slide-nav {
             display: inline-flex;
             align-items: center;
@@ -440,7 +439,7 @@
         .zoom-modal-title { font-family: 'Outfit', sans-serif; font-size: 3.2rem; font-weight: 900; color: #ffffff; margin-bottom: 1.5rem; }
         .zoom-modal-body { font-size: 1.8rem; line-height: 1.8; color: #f8fafc; }
 
-        /* ✨ FULL TABLE WITHOUT INNER SCROLLBAR */
+        /* Full Table */
         .table-responsive-full {
             width: 100%;
             overflow: visible;
@@ -689,28 +688,18 @@
 
     <main class="viewport">
 
-        <!-- Slide 1 -->
+        <!-- Slide 1 (REMOVED FILE INFORMATION CARD AS REQUESTED) -->
         <div class="slide active" id="slide-1">
             <div class="slide-tag">📍 Slide 1 of 8</div>
             <h2>Starbucks Beverage Nutrition Facts</h2>
             
             <div class="grid-2">
                 <div>
-                    <div class="card" onclick="openZoomModal('Dataset Title & Scope', 'Nutritional profiling of <strong>Starbucks Handcrafted Beverages</strong> across 9 distinct beverage categories and multiple milk/size preparations.')" style="margin-bottom: 1.8rem;">
-                        <div class="card-icon">☕</div>
-                        <div class="card-title">Dataset Title & Scope</div>
-                        <p class="card-desc">
-                            Nutritional profiling of <strong>Starbucks Handcrafted Beverages</strong> across 9 distinct beverage categories and multiple milk/size preparations.
-                        </p>
-                    </div>
-
-                    <div class="card" onclick="openZoomModal('File Information', '<strong>Source File:</strong> StarBucksNutritionFacts.csv.xlsx<br><br><strong>Cleaned File:</strong> Starbucks_Nutrition_Facts_Cleaned.csv<br><br><strong>Notebook:</strong> Starbucks_Data_Cleaning_and_Analysis.ipynb')">
-                        <div class="card-icon">📂</div>
-                        <div class="card-title">File Information</div>
-                        <p class="card-desc">
-                            <strong>Source File:</strong> <code>StarBucksNutritionFacts.csv.xlsx</code><br><br>
-                            <strong>Cleaned File:</strong> <code>Starbucks_Nutrition_Facts_Cleaned.csv</code><br><br>
-                            <strong>Notebook:</strong> <code>Starbucks_Data_Cleaning_and_Analysis.ipynb</code>
+                    <div class="card" onclick="openZoomModal('Dataset Title & Scope', 'Nutritional profiling of <strong>Starbucks Handcrafted Beverages</strong> across 9 distinct beverage categories and multiple milk/size preparations.')" style="height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 3rem;">
+                        <div class="card-icon" style="font-size: 4rem; margin-bottom: 1.5rem;">☕</div>
+                        <div class="card-title" style="font-size: 2.2rem; margin-bottom: 1.25rem;">Dataset Title & Scope</div>
+                        <p class="card-desc" style="font-size: 1.55rem; line-height: 1.8;">
+                            Comprehensive nutritional profiling and data cleaning analysis of <strong>Starbucks Handcrafted Beverages</strong> across 9 distinct beverage categories and multiple serving sizes and milk preparations.
                         </p>
                     </div>
                 </div>
@@ -782,7 +771,7 @@ df = pd.read_excel("StarBucksNutritionFacts.csv.xlsx")
 print(f"Acquired Dataset Shape: {df.shape[0]} rows x {df.shape[1]} columns")</pre>
         </div>
 
-        <!-- Slide 3 (WITH FULL TABLE & "GO TO SLIDE 6" BUTTON) -->
+        <!-- Slide 3 -->
         <div class="slide" id="slide-3">
             <div class="slide-tag">📊 Slide 3 of 8</div>
             <h2>Present Dataset (Raw Overview)</h2>
@@ -818,7 +807,6 @@ print(f"Acquired Dataset Shape: {df.shape[0]} rows x {df.shape[1]} columns")</pr
                 </table>
             </div>
 
-            <!-- BUTTON TO GO DIRECTLY TO SLIDE 6 -->
             <div style="display: flex; justify-content: flex-start;">
                 <button class="btn-slide-nav" onclick="goToSlide(6)">
                     ➜ Go to Slide 6 (Post-Cleaned Data Summary)
