@@ -10,14 +10,14 @@
             --sb-green: #00704A;
             --sb-dark-green: #1e3932;
             --sb-light-green: #00A862;
-            --bg-dark: #070d19;
-            --bg-card: #0f1a2e;
+            --bg-dark: #050a15;
+            --bg-card: #0d1627;
             --text-primary: #ffffff;
             --text-sub: #cbd5e1;
             --text-muted: #94a3b8;
             --accent-gold: #fbbf24;
             --accent-cyan: #38bdf8;
-            --border: #1e2e4a;
+            --border: #1a2a44;
             --radius-lg: 24px;
             --radius-md: 16px;
         }
@@ -49,7 +49,7 @@
             align-items: center;
             justify-content: space-between;
             border-bottom: 1px solid var(--border);
-            background: rgba(7, 13, 25, 0.95);
+            background: rgba(5, 10, 21, 0.95);
             backdrop-filter: blur(16px);
             z-index: 100;
         }
@@ -72,13 +72,14 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 800;
+            box-shadow: 0 0 15px rgba(0, 168, 98, 0.4);
         }
 
         .progress-container {
             flex: 1;
             max-width: 500px;
             height: 10px;
-            background: rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 999px;
             margin: 0 3rem;
             overflow: hidden;
@@ -88,6 +89,7 @@
             height: 100%;
             width: 12.5%;
             background: linear-gradient(90deg, var(--sb-green), var(--accent-cyan));
+            box-shadow: 0 0 12px var(--accent-cyan);
             transition: width 0.4s ease;
         }
 
@@ -114,6 +116,7 @@
             padding: 2rem 3rem;
         }
 
+        /* Slide Container */
         .slide {
             position: absolute;
             width: 95vw;
@@ -124,9 +127,9 @@
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7);
             opacity: 0;
-            transform: scale(0.97) translateY(25px);
+            transform: scale(0.96) translateY(25px);
             transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
             display: none;
@@ -167,38 +170,84 @@
             line-height: 1.2;
         }
 
-        /* Grid Layouts */
+        /* Grids */
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2.2rem; }
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.2rem; }
         .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.8rem; }
 
-        .card {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            padding: 2.2rem;
-            transition: all 0.25s ease;
+        /* Focus Dimming Container */
+        .focus-container {
+            position: relative;
         }
 
-        .card:hover {
-            background: rgba(255, 255, 255, 0.08);
+        /* ✨ HIGH IMPACT FOCUS SPOTLIGHT EFFECT ON CARDS */
+        .card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 2.2rem;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        /* Radial Cursor Spotlight Glow */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: var(--mouse-y, 50%);
+            left: var(--mouse-x, 50%);
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 168, 98, 0.25) 0%, transparent 65%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        /* Active Focus Effect: Scale, Glow & Spotlight */
+        .card:hover, .card.focused {
+            background: rgba(255, 255, 255, 0.07);
             border-color: var(--sb-light-green);
-            transform: translateY(-4px);
+            transform: scale(1.03) translateY(-6px);
+            box-shadow: 0 15px 40px -10px rgba(0, 168, 98, 0.5), 0 0 25px rgba(0, 168, 98, 0.3);
+            z-index: 10;
+        }
+
+        /* Sibling Dimming Focus Effect */
+        .focus-container:hover .card:not(:hover) {
+            opacity: 0.45;
+            filter: blur(1px);
+            transform: scale(0.98);
         }
 
         .card-icon { font-size: 3rem; margin-bottom: 1.2rem; }
         .card-title { font-size: 1.7rem; font-weight: 800; color: #ffffff; margin-bottom: 0.85rem; font-family: 'Outfit', sans-serif; }
         .card-desc { font-size: 1.35rem; color: var(--text-sub); line-height: 1.7; }
         .card-desc strong { color: #ffffff; font-weight: 700; }
-        .card-desc code { font-size: 1.2rem; color: var(--accent-cyan); background: rgba(0,0,0,0.3); padding: 0.2rem 0.5rem; border-radius: 6px; }
+        .card-desc code { font-size: 1.2rem; color: var(--accent-cyan); background: rgba(0,0,0,0.4); padding: 0.25rem 0.6rem; border-radius: 6px; }
 
+        /* Stat Cards Focus Effect */
         .stat-card {
-            background: linear-gradient(145deg, rgba(0, 112, 74, 0.25), rgba(15, 26, 46, 0.95));
-            border: 2px solid rgba(0, 112, 74, 0.5);
+            background: linear-gradient(145deg, rgba(0, 112, 74, 0.2), rgba(15, 26, 46, 0.95));
+            border: 2px solid rgba(0, 112, 74, 0.4);
             padding: 2.2rem 1.5rem;
             border-radius: var(--radius-md);
             text-align: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.35s ease;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05) translateY(-5px);
+            border-color: var(--sb-light-green);
+            box-shadow: 0 0 30px rgba(0, 168, 98, 0.6);
         }
 
         .stat-num {
@@ -207,6 +256,7 @@
             font-weight: 900;
             color: var(--sb-light-green);
             line-height: 1;
+            text-shadow: 0 0 20px rgba(0, 168, 98, 0.4);
         }
 
         .stat-label {
@@ -218,7 +268,7 @@
             margin-top: 0.8rem;
         }
 
-        /* Tabs */
+        /* Glowing Focus Tabs */
         .tab-buttons {
             display: flex;
             gap: 1rem;
@@ -229,28 +279,36 @@
 
         .tab-btn {
             background: transparent;
-            border: none;
+            border: 1.5px solid transparent;
             color: var(--text-muted);
             padding: 1rem 1.8rem;
             border-radius: 12px;
             font-weight: 800;
             font-size: 1.3rem;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
         }
 
         .tab-btn:hover { color: #ffffff; background: rgba(255,255,255,0.08); }
-        .tab-btn.active { background: var(--sb-green); color: #ffffff; }
+        
+        .tab-btn.active {
+            background: var(--sb-green);
+            color: #ffffff;
+            border-color: var(--sb-light-green);
+            box-shadow: 0 0 25px rgba(0, 168, 98, 0.6);
+            transform: scale(1.04);
+        }
 
-        .tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .tab-content { display: none; animation: focusPulse 0.4s ease; }
         .tab-content.active { display: block; }
 
-        /* Table */
+        /* Tables */
         .table-responsive {
             max-height: 520px;
             overflow-y: auto;
-            border: 1px solid var(--border);
+            border: 1.5px solid var(--border);
             border-radius: var(--radius-md);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
         table {
@@ -276,9 +334,14 @@
             padding: 1.15rem 1.5rem;
             border-bottom: 1px solid rgba(255,255,255,0.07);
             color: #cbd5e1;
+            transition: all 0.2s ease;
         }
 
-        tr:hover td { background: rgba(255, 255, 255, 0.05); }
+        tr:hover td {
+            background: rgba(0, 168, 98, 0.12);
+            color: #ffffff;
+            font-weight: 600;
+        }
 
         .badge {
             display: inline-block;
@@ -287,13 +350,13 @@
             font-size: 1.05rem;
             font-weight: 800;
         }
-        .badge-danger { background: rgba(239, 68, 68, 0.3); color: #fca5a5; }
-        .badge-warning { background: rgba(245, 158, 11, 0.3); color: #fde047; }
-        .badge-success { background: rgba(16, 185, 129, 0.3); color: #6ee7b7; }
+        .badge-danger { background: rgba(239, 68, 68, 0.3); color: #fca5a5; box-shadow: 0 0 10px rgba(239, 68, 68, 0.3); }
+        .badge-warning { background: rgba(245, 158, 11, 0.3); color: #fde047; box-shadow: 0 0 10px rgba(245, 158, 11, 0.3); }
+        .badge-success { background: rgba(16, 185, 129, 0.3); color: #6ee7b7; box-shadow: 0 0 10px rgba(16, 185, 129, 0.3); }
 
         pre {
             background: #040711;
-            border: 1px solid var(--border);
+            border: 1.5px solid var(--border);
             border-radius: var(--radius-md);
             padding: 1.8rem;
             font-family: monospace;
@@ -302,6 +365,13 @@
             overflow-x: auto;
             margin-top: 1.5rem;
             line-height: 1.7;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: border-color 0.3s ease;
+        }
+
+        pre:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.3);
         }
 
         /* Controls Bar */
@@ -312,7 +382,7 @@
             align-items: center;
             justify-content: space-between;
             border-top: 1px solid var(--border);
-            background: rgba(7, 13, 25, 0.95);
+            background: rgba(5, 10, 21, 0.95);
             backdrop-filter: blur(16px);
             z-index: 100;
         }
@@ -327,18 +397,19 @@
             font-size: 1.2rem;
             cursor: pointer;
             border: none;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
         }
 
         .btn-primary {
             background: var(--sb-green);
             color: #ffffff;
-            box-shadow: 0 4px 20px rgba(0, 112, 74, 0.4);
+            box-shadow: 0 4px 25px rgba(0, 112, 74, 0.5);
         }
 
         .btn-primary:hover {
             background: var(--sb-light-green);
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 0 30px rgba(0, 168, 98, 0.7);
         }
 
         .btn-secondary {
@@ -391,9 +462,9 @@
         }
 
         .menu-item:hover { background: rgba(255,255,255,0.1); color: #ffffff; }
-        .menu-item.active { background: var(--sb-green); color: #ffffff; font-weight: 800; }
+        .menu-item.active { background: var(--sb-green); color: #ffffff; font-weight: 800; box-shadow: 0 0 20px rgba(0, 168, 98, 0.5); }
 
-        /* Slide 8: Dedicated Giant Thank You Slide */
+        /* Slide 8 Thank You Slide */
         .thank-you-slide-wrapper {
             height: 100%;
             display: flex;
@@ -402,10 +473,10 @@
             justify-content: center;
             text-align: center;
             padding: 2rem;
-            background: radial-gradient(circle at center, rgba(0, 112, 74, 0.25) 0%, rgba(15, 26, 46, 0.95) 75%);
+            background: radial-gradient(circle at center, rgba(0, 112, 74, 0.35) 0%, rgba(13, 22, 39, 0.98) 75%);
             border-radius: var(--radius-lg);
-            border: 3px solid var(--sb-light-green);
-            box-shadow: 0 0 60px rgba(0, 112, 74, 0.4);
+            border: 3.5px solid var(--sb-light-green);
+            box-shadow: 0 0 80px rgba(0, 168, 98, 0.5);
         }
 
         .thank-you-badge {
@@ -424,6 +495,7 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 1.5rem;
             letter-spacing: -2px;
+            filter: drop-shadow(0 0 30px rgba(52, 211, 153, 0.4));
         }
 
         .thank-you-subtitle {
@@ -435,14 +507,14 @@
             line-height: 1.5;
         }
 
+        @keyframes focusPulse {
+            0% { opacity: 0; transform: scale(0.97) translateY(10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -486,7 +558,7 @@
             <div class="slide-tag">📍 Slide 1 of 8</div>
             <h2>Starbucks Beverage Nutrition Facts</h2>
             
-            <div class="grid-2">
+            <div class="grid-2 focus-container">
                 <div>
                     <div class="card" style="margin-bottom: 1.8rem;">
                         <div class="card-icon">☕</div>
@@ -507,7 +579,7 @@
                     </div>
                 </div>
 
-                <div class="grid-2" style="grid-template-columns: 1fr 1fr;">
+                <div class="grid-2 focus-container" style="grid-template-columns: 1fr 1fr;">
                     <div class="stat-card">
                         <div class="stat-num">242</div>
                         <div class="stat-label">Total Beverage Rows</div>
@@ -533,7 +605,7 @@
             <div class="slide-tag">📥 Slide 2 of 8</div>
             <h2>How the Data Was Acquired</h2>
 
-            <div class="grid-3" style="margin-bottom: 2rem;">
+            <div class="grid-3 focus-container" style="margin-bottom: 2rem;">
                 <div class="card">
                     <div class="card-icon">🌐</div>
                     <div class="card-title">1. Public Menu Source</div>
@@ -611,7 +683,7 @@ print(f"Acquired Dataset Shape: {df.shape[0]} rows x {df.shape[1]} columns")</pr
             </div>
         </div>
 
-        <!-- Slide 4 -->
+        <!-- Slide 4: Processes Used to Clean Data (WITH HIGH-IMPACT FOCUS EFFECT) -->
         <div class="slide" id="slide-4">
             <div class="slide-tag">🧹 Slide 4 of 8</div>
             <h2>Processes Used to Clean the Data</h2>
@@ -624,7 +696,7 @@ print(f"Acquired Dataset Shape: {df.shape[0]} rows x {df.shape[1]} columns")</pr
             </div>
 
             <div class="tab-content active" id="tab-missing">
-                <div class="grid-2">
+                <div class="grid-2 focus-container">
                     <div class="card">
                         <div class="card-title">Explicit Missing Value (NaN)</div>
                         <p class="card-desc">
@@ -641,32 +713,38 @@ print(f"Acquired Dataset Shape: {df.shape[0]} rows x {df.shape[1]} columns")</pr
             </div>
 
             <div class="tab-content" id="tab-typos">
-                <div class="card">
-                    <div class="card-title">Typographical Format Error in Total Fat (g)</div>
-                    <p class="card-desc">
-                        Row 237 contained string <code>'3 2'</code> (space entered instead of decimal point <code>.</code>). This caused Pandas to read the entire column as <code>object</code> text.<br><br>
-                        <strong>Fix:</strong> Replaced <code>'3 2'</code> with <code>'3.2'</code> and converted column to <code>float64</code>.
-                    </p>
+                <div class="grid-1 focus-container">
+                    <div class="card">
+                        <div class="card-title">Typographical Format Error in Total Fat (g)</div>
+                        <p class="card-desc">
+                            Row 237 contained string <code>'3 2'</code> (space entered instead of decimal point <code>.</code>). This caused Pandas to read the entire column as <code>object</code> text.<br><br>
+                            <strong>Fix:</strong> Replaced <code>'3 2'</code> with <code>'3.2'</code> and converted column to <code>float64</code>.
+                        </p>
+                    </div>
                 </div>
             </div>
 
             <div class="tab-content" id="tab-duplicates">
-                <div class="card">
-                    <div class="card-title">Duplicate Row & Recipe Check</div>
-                    <p class="card-desc">
-                        Ran <code>df.duplicated().sum()</code> &rarr; <strong>0 exact duplicate rows</strong>.<br><br>
-                        Verified recipe combinations of (<code>Beverage_category</code>, <code>Beverage</code>, <code>Beverage_prep</code>). Confirmed all 242 rows represent distinct valid menu items.
-                    </p>
+                <div class="grid-1 focus-container">
+                    <div class="card">
+                        <div class="card-title">Duplicate Row & Recipe Check</div>
+                        <p class="card-desc">
+                            Ran <code>df.duplicated().sum()</code> &rarr; <strong>0 exact duplicate rows</strong>.<br><br>
+                            Verified recipe combinations of (<code>Beverage_category</code>, <code>Beverage</code>, <code>Beverage_prep</code>). Confirmed all 242 rows represent distinct valid menu items.
+                        </p>
+                    </div>
                 </div>
             </div>
 
             <div class="tab-content" id="tab-headers">
-                <div class="card">
-                    <div class="card-title">Whitespace Pollution Removal</div>
-                    <p class="card-desc">
-                        Column headers contained irregular padding spaces (e.g. <code>' Total Fat (g)'</code>).<br><br>
-                        <strong>Fix:</strong> Executed <code>df.columns = df.columns.str.strip()</code> and trimmed all categorical string columns.
-                    </p>
+                <div class="grid-1 focus-container">
+                    <div class="card">
+                        <div class="card-title">Whitespace Pollution Removal</div>
+                        <p class="card-desc">
+                            Column headers contained irregular padding spaces (e.g. <code>' Total Fat (g)'</code>).<br><br>
+                            <strong>Fix:</strong> Executed <code>df.columns = df.columns.str.strip()</code> and trimmed all categorical string columns.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -676,7 +754,7 @@ print(f"Acquired Dataset Shape: {df.shape[0]} rows x {df.shape[1]} columns")</pr
             <div class="slide-tag">🛠️ Slide 5 of 8</div>
             <h2>Tools or Methods Used to Clean It</h2>
 
-            <div class="grid-4" style="margin-bottom: 2rem;">
+            <div class="grid-4 focus-container" style="margin-bottom: 2rem;">
                 <div class="stat-card">
                     <div class="stat-num" style="font-size:2.8rem;">Python 3</div>
                     <div class="stat-label">Core Language</div>
@@ -720,7 +798,7 @@ for col in numeric_columns:
             <div class="slide-tag">✨ Slide 6 of 8</div>
             <h2>After Cleaning (Post-Cleaned Data)</h2>
 
-            <div class="grid-4" style="margin-bottom: 2rem;">
+            <div class="grid-4 focus-container" style="margin-bottom: 2rem;">
                 <div class="stat-card">
                     <div class="stat-num">242</div>
                     <div class="stat-label">Cleaned Rows</div>
@@ -764,12 +842,12 @@ for col in numeric_columns:
             </div>
         </div>
 
-        <!-- Slide 7: Conclusion & Machine Learning -->
+        <!-- Slide 7 -->
         <div class="slide" id="slide-7">
             <div class="slide-tag">🎯 Slide 7 of 8</div>
             <h2>Conclusion & Machine Learning Models</h2>
 
-            <div class="grid-2" style="margin-bottom: 2rem;">
+            <div class="grid-2 focus-container" style="margin-bottom: 2rem;">
                 <div class="card">
                     <div class="card-title">1. Data Cleaning Results</div>
                     <p class="card-desc">
@@ -785,7 +863,7 @@ for col in numeric_columns:
                 </div>
             </div>
 
-            <div class="grid-2">
+            <div class="grid-2 focus-container">
                 <div class="stat-card" style="background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.4);">
                     <div class="stat-num" style="color: var(--accent-cyan); font-size: 3rem;">Decision Tree</div>
                     <div class="stat-label">Classification Rule Model</div>
@@ -798,7 +876,7 @@ for col in numeric_columns:
             </div>
         </div>
 
-        <!-- Slide 8: Dedicated Giant Full-Screen Thank You Slide -->
+        <!-- Slide 8 -->
         <div class="slide" id="slide-8" style="padding: 0;">
             <div class="thank-you-slide-wrapper">
                 <div class="slide-tag" style="margin-bottom: 1.5rem;">🎉 SLIDE 8 OF 8 &bull; PRESENTATION COMPLETE</div>
@@ -896,6 +974,17 @@ for col in numeric_columns:
             dot.onclick = () => goToSlide(i);
             dotsContainer.appendChild(dot);
         }
+
+        // ✨ Interactive Mouse Cursor Spotlight Tracking for Cards
+        document.addEventListener('mousemove', (e) => {
+            document.querySelectorAll('.card').forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight' || e.key === 'Space') {
