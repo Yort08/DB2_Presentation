@@ -625,7 +625,7 @@
         }
 
         .thank-you-subtitle {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: #e2e8f0;
             font-weight: 600;
             max-width: 900px;
@@ -649,7 +649,7 @@
     <header class="app-header">
         <div class="brand">
             <button class="btn btn-secondary" id="toggle-menu-btn" title="Slide Menu" style="padding: 0.6rem 1.1rem; font-size: 1.3rem;">☰ Menu</button>
-            <span class="brand-badge">Starbucks ML</span>
+            <span class="brand-badge">Starbucks Data Cleaning</span>
             <span>Nutrition Facts Presentation</span>
         </div>
 
@@ -659,9 +659,6 @@
 
         <div class="header-actions">
             <span class="slide-counter" id="slide-counter">Slide 1 of 8</span>
-            <a href="https://github.com/Yort08/DB2_Presentation" target="_blank" class="btn btn-secondary" style="font-size:1rem; padding:0.6rem 1.2rem;">
-                GitHub Repo
-            </a>
         </div>
     </header>
 
@@ -673,7 +670,7 @@
         <div class="menu-item" onclick="goToSlide(4)"><span>4.</span> Cleaning Processes</div>
         <div class="menu-item" onclick="goToSlide(5)"><span>5.</span> Tools & Methods</div>
         <div class="menu-item" onclick="goToSlide(6)"><span>6.</span> After Cleaning Data</div>
-        <div class="menu-item" onclick="goToSlide(7)"><span>7.</span> Conclusion & Machine Learning</div>
+        <div class="menu-item" onclick="goToSlide(7)"><span>7.</span> Conclusion & Findings</div>
         <div class="menu-item" onclick="goToSlide(8)"><span>8.</span> 🎉 Thank You!</div>
     </div>
 
@@ -688,7 +685,7 @@
 
     <main class="viewport">
 
-        <!-- Slide 1 (REMOVED FILE INFORMATION CARD AS REQUESTED) -->
+        <!-- Slide 1 -->
         <div class="slide active" id="slide-1">
             <div class="slide-tag">📍 Slide 1 of 8</div>
             <h2>Starbucks Beverage Nutrition Facts</h2>
@@ -896,8 +893,8 @@ print(f"Acquired Dataset Shape: {df.shape[0]} rows x {df.shape[1]} columns")</pr
                     <div class="stat-label">Numeric Computation</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-num" style="font-size:2.8rem;">Scikit-Learn</div>
-                    <div class="stat-label">Label Encoding & ML</div>
+                    <div class="stat-num" style="font-size:2.8rem;">Colab</div>
+                    <div class="stat-label">Google Environment</div>
                 </div>
             </div>
 
@@ -976,21 +973,21 @@ for col in numeric_columns:
             </div>
         </div>
 
-        <!-- Slide 7 -->
+        <!-- Slide 7 (UPDATED: CLEANING RESULTS & NUTRITIONAL INSIGHTS ONLY, NO ML) -->
         <div class="slide" id="slide-7">
             <div class="slide-tag">🎯 Slide 7 of 8</div>
-            <h2>Conclusion & Machine Learning Models</h2>
+            <h2>Conclusion & Key Findings</h2>
 
             <div class="grid-2 focus-container" style="margin-bottom: 2rem;">
-                <div class="card">
+                <div class="card" onclick="openZoomModal('1. Data Cleaning Results', 'Restored 100% numerical data types across all features, corrected formatting typos ('3 2' &rarr; 3.2), eliminated whitespace pollution, and imputed missing caffeine entries using category medians.')">
                     <div class="card-title">1. Data Cleaning Results</div>
                     <p class="card-desc">
                         Restored 100% numerical data types across all features, corrected formatting typos (<code>'3 2'</code> &rarr; <code>3.2</code>), eliminated whitespace pollution, and imputed missing caffeine entries using category medians.
                     </p>
                 </div>
 
-                <div class="card">
-                    <div class="card-title">2. Key Insights</div>
+                <div class="card" onclick="openZoomModal('2. Key Nutritional Insights', 'Frappuccino® Blended Coffee and Smoothies carry the highest calorie (up to 510 kcal) and sugar load (up to 84g sugar), while Brewed Coffee delivers peak caffeine (up to 410 mg).')">
+                    <div class="card-title">2. Key Nutritional Insights</div>
                     <p class="card-desc">
                         <em>Frappuccino® Blended Coffee</em> and <em>Smoothies</em> carry the highest calorie (up to 510 kcal) and sugar load (up to <strong>84g sugar</strong>), while <em>Brewed Coffee</em> delivers peak caffeine (up to <strong>410 mg</strong>).
                     </p>
@@ -998,35 +995,32 @@ for col in numeric_columns:
             </div>
 
             <div class="grid-2 focus-container">
-                <div class="stat-card" style="background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.4);">
-                    <div class="stat-num" style="color: var(--accent-cyan); font-size: 3rem;">Decision Tree</div>
-                    <div class="stat-label">Classification Rule Model</div>
+                <div class="stat-card" onclick="openZoomModal('100% Cleaned Dataset', 'Zero missing values, zero formatting errors, and complete numeric standardization ready for analytical reporting.')">
+                    <div class="stat-num" style="color: var(--sb-light-green); font-size: 3.5rem;">100% Clean</div>
+                    <div class="stat-label">Zero Missing Values</div>
                 </div>
 
-                <div class="stat-card" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4);">
-                    <div class="stat-num" style="color: var(--sb-light-green); font-size: 3rem;">Random Forest</div>
-                    <div class="stat-label">100-Tree Ensemble Classifier</div>
+                <div class="stat-card" onclick="openZoomModal('Dataset Standardized', 'All 18 nutritional features parsed as proper int64/float64 numerical metrics.')">
+                    <div class="stat-num" style="color: var(--accent-cyan); font-size: 3.5rem;">18 Features</div>
+                    <div class="stat-label">Standardized Numeric Types</div>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 8 -->
+        <!-- Slide 8 (UPDATED: NO GITHUB BUTTON, NO ML MENTION) -->
         <div class="slide" id="slide-8" style="padding: 0;">
             <div class="thank-you-slide-wrapper">
                 <div class="slide-tag" style="margin-bottom: 1.5rem;">🎉 SLIDE 8 OF 8 &bull; PRESENTATION COMPLETE</div>
                 <div class="thank-you-badge">☕✨</div>
                 <div class="thank-you-hero-title">Thank You!</div>
                 <div class="thank-you-subtitle">
-                    Starbucks Beverage Nutrition Facts Data Cleaning & Machine Learning Presentation
+                    Starbucks Beverage Nutrition Facts Data Cleaning Presentation
                 </div>
                 
                 <div style="display: flex; gap: 2rem; justify-content: center; margin-top: 1rem;">
                     <button class="btn btn-primary" onclick="goToSlide(1)" style="font-size: 1.4rem; padding: 1.1rem 2.8rem;">
                         🔄 Restart Presentation
                     </button>
-                    <a href="https://github.com/Yort08/DB2_Presentation" target="_blank" class="btn btn-secondary" style="font-size: 1.4rem; padding: 1.1rem 2.8rem;">
-                        🌐 View GitHub Repository
-                    </a>
                 </div>
             </div>
         </div>
