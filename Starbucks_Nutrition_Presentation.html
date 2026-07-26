@@ -41,7 +41,7 @@
             font-size: 18px;
         }
 
-        /* Top Header */
+        /* Header */
         header.app-header {
             height: 75px;
             padding: 0 3rem;
@@ -106,7 +106,7 @@
             font-family: 'Outfit', sans-serif;
         }
 
-        /* Full Screen Viewport */
+        /* Viewport */
         main.viewport {
             flex: 1;
             position: relative;
@@ -116,7 +116,7 @@
             padding: 2rem 3rem;
         }
 
-        /* Slide Container */
+        /* Slide */
         .slide {
             position: absolute;
             width: 95vw;
@@ -175,9 +175,7 @@
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.2rem; }
         .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.8rem; }
 
-        .focus-container {
-            position: relative;
-        }
+        .focus-container { position: relative; }
 
         /* Cards */
         .card {
@@ -261,7 +259,7 @@
             margin-top: 0.8rem;
         }
 
-        /* 🔍 Dynamic Zoom-In Tab Buttons & Animated Content */
+        /* Tabs */
         .tab-buttons {
             display: flex;
             gap: 1.2rem;
@@ -289,7 +287,6 @@
             box-shadow: 0 8px 25px rgba(56, 189, 248, 0.3);
         }
 
-        /* ✨ ACTIVE TAB ZOOM EFFECT: Makes Active Tab Button & Content POP OUT BIGGER */
         .tab-btn.active {
             background: var(--sb-green);
             color: #ffffff;
@@ -308,11 +305,10 @@
         .tab-content.active {
             display: block;
             opacity: 1;
-            transform: scale(1.02) translateY(0); /* Zoom In Enlarged Scale */
+            transform: scale(1.02) translateY(0);
             animation: zoomInContent 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* ZOOM IN ZOOMED CARD CONTAINER */
         .zoomed-content-card {
             background: linear-gradient(145deg, rgba(0, 112, 74, 0.15) 0%, rgba(13, 22, 39, 0.95) 100%);
             border: 2.5px solid var(--sb-light-green);
@@ -338,7 +334,32 @@
             padding: 0.3rem 0.8rem;
         }
 
-        /* Fullscreen Interactive Zoom Modal Overlay */
+        /* 📍 LOWER-LEFT BACK TO SLIDE 3 BUTTON STYLING */
+        .btn-back-to-slide {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(15, 26, 46, 0.9));
+            border: 2px solid var(--accent-cyan);
+            color: #ffffff;
+            padding: 0.9rem 1.8rem;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 5px 20px rgba(56, 189, 248, 0.3);
+            margin-top: 1.8rem;
+        }
+
+        .btn-back-to-slide:hover {
+            background: var(--accent-cyan);
+            color: #070d19;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.7);
+        }
+
+        /* Fullscreen Zoom Modal */
         .zoom-modal {
             position: fixed;
             top: 0;
@@ -356,10 +377,7 @@
             transition: opacity 0.3s ease;
         }
 
-        .zoom-modal.active {
-            opacity: 1;
-            pointer-events: all;
-        }
+        .zoom-modal.active { opacity: 1; pointer-events: all; }
 
         .zoom-modal-box {
             background: linear-gradient(145deg, rgba(0, 112, 74, 0.2) 0%, rgba(15, 26, 46, 0.98) 100%);
@@ -374,9 +392,7 @@
             position: relative;
         }
 
-        .zoom-modal.active .zoom-modal-box {
-            transform: scale(1.05);
-        }
+        .zoom-modal.active .zoom-modal-box { transform: scale(1.05); }
 
         .zoom-modal-close {
             position: absolute;
@@ -396,28 +412,13 @@
             transition: all 0.2s ease;
         }
 
-        .zoom-modal-close:hover {
-            background: #ef4444;
-            transform: scale(1.1);
-        }
-
-        .zoom-modal-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 3.2rem;
-            font-weight: 900;
-            color: #ffffff;
-            margin-bottom: 1.5rem;
-        }
-
-        .zoom-modal-body {
-            font-size: 1.8rem;
-            line-height: 1.8;
-            color: #f8fafc;
-        }
+        .zoom-modal-close:hover { background: #ef4444; transform: scale(1.1); }
+        .zoom-modal-title { font-family: 'Outfit', sans-serif; font-size: 3.2rem; font-weight: 900; color: #ffffff; margin-bottom: 1.5rem; }
+        .zoom-modal-body { font-size: 1.8rem; line-height: 1.8; color: #f8fafc; }
 
         /* Tables */
         .table-responsive {
-            max-height: 520px;
+            max-height: 460px;
             overflow-y: auto;
             border: 1.5px solid var(--border);
             border-radius: var(--radius-md);
@@ -656,7 +657,7 @@
         <div class="menu-item" onclick="goToSlide(8)"><span>8.</span> 🎉 Thank You!</div>
     </div>
 
-    <!-- Zoom Modal Popup Overlay -->
+    <!-- Zoom Modal -->
     <div class="zoom-modal" id="zoom-modal">
         <div class="zoom-modal-box">
             <div class="zoom-modal-close" onclick="closeZoomModal()">✕</div>
@@ -797,7 +798,7 @@ print(f"Acquired Dataset Shape: {df.shape[0]} rows x {df.shape[1]} columns")</pr
             </div>
         </div>
 
-        <!-- Slide 4: Processes Used to Clean Data (WITH INTERACTIVE ZOOM ON CLICKING TAB BUTTON 1, 2, 3, 4) -->
+        <!-- Slide 4 -->
         <div class="slide" id="slide-4">
             <div class="slide-tag">🧹 Slide 4 of 8</div>
             <h2>Processes Used to Clean the Data</h2>
@@ -809,7 +810,6 @@ print(f"Acquired Dataset Shape: {df.shape[0]} rows x {df.shape[1]} columns")</pr
                 <button class="tab-btn" onclick="switchTab(event, 'tab-headers')">4. Whitespace Trimming 🔍</button>
             </div>
 
-            <!-- Tab 1 Zoomed In View -->
             <div class="tab-content active" id="tab-missing">
                 <div class="grid-2 focus-container">
                     <div class="zoomed-content-card" onclick="openZoomModal('1. Explicit Missing Value (NaN)', 'Audited via <code>df.isnull().sum()</code>.<br><br>Identified <strong>1 explicit NaN</strong> in <code>Caffeine (mg)</code> at Row 158 (Iced Black Tea Chai Latte).')">
@@ -830,7 +830,6 @@ print(f"Acquired Dataset Shape: {df.shape[0]} rows x {df.shape[1]} columns")</pr
                 </div>
             </div>
 
-            <!-- Tab 2 Zoomed In View -->
             <div class="tab-content" id="tab-typos">
                 <div class="zoomed-content-card" onclick="openZoomModal('2. Typographical Format Error in Total Fat (g)', 'Row 237 contained string <code>'3 2'</code> (space entered instead of decimal point <code>.</code>).<br><br><strong>Fix Applied:</strong> Replaced <code>'3 2'</code> with <code>'3.2'</code> and converted column to numeric float64.')">
                     <div class="card-title">🔍 Typographical Format Error in Total Fat (g)</div>
@@ -841,7 +840,6 @@ print(f"Acquired Dataset Shape: {df.shape[0]} rows x {df.shape[1]} columns")</pr
                 </div>
             </div>
 
-            <!-- Tab 3 Zoomed In View -->
             <div class="tab-content" id="tab-duplicates">
                 <div class="zoomed-content-card" onclick="openZoomModal('3. Duplicate Row & Recipe Check', 'Ran <code>df.duplicated().sum()</code> &rarr; <strong>0 exact duplicate rows</strong>.<br><br>Verified recipe combinations of (Beverage_category, Beverage, Beverage_prep). Confirmed all 242 rows represent distinct valid menu items.')">
                     <div class="card-title">🔍 Duplicate Row & Recipe Check</div>
@@ -852,7 +850,6 @@ print(f"Acquired Dataset Shape: {df.shape[0]} rows x {df.shape[1]} columns")</pr
                 </div>
             </div>
 
-            <!-- Tab 4 Zoomed In View -->
             <div class="tab-content" id="tab-headers">
                 <div class="zoomed-content-card" onclick="openZoomModal('4. Whitespace Pollution Removal', 'Column headers contained irregular padding spaces (e.g. <code>' Total Fat (g)'</code>).<br><br><strong>Fix Applied:</strong> Executed <code>df.columns = df.columns.str.strip()</code> and trimmed all categorical string columns.')">
                     <div class="card-title">🔍 Whitespace Pollution Removal</div>
@@ -908,12 +905,12 @@ for col in numeric_columns:
     df[col] = df[col].fillna(df[col].median())</pre>
         </div>
 
-        <!-- Slide 6 -->
+        <!-- Slide 6 (WITH LOWER-LEFT "BACK TO SLIDE 3" BUTTON) -->
         <div class="slide" id="slide-6">
             <div class="slide-tag">✨ Slide 6 of 8</div>
             <h2>After Cleaning (Post-Cleaned Data)</h2>
 
-            <div class="grid-4 focus-container" style="margin-bottom: 2rem;">
+            <div class="grid-4 focus-container" style="margin-bottom: 1.8rem;">
                 <div class="stat-card">
                     <div class="stat-num">242</div>
                     <div class="stat-label">Cleaned Rows</div>
@@ -954,6 +951,13 @@ for col in numeric_columns:
                         <tr><td>Caffeine (mg)</td><td>242</td><td>87.58</td><td>62.78</td><td>0.00</td><td>75.00</td><td>410.00</td></tr>
                     </tbody>
                 </table>
+            </div>
+
+            <!-- LOWER-LEFT BACK TO SLIDE 3 BUTTON -->
+            <div style="display: flex; justify-content: flex-start;">
+                <button class="btn-back-to-slide" onclick="goToSlide(3)">
+                    ↩ Back to Slide 3 (Raw Dataset Overview)
+                </button>
             </div>
         </div>
 
@@ -1072,7 +1076,6 @@ for col in numeric_columns:
             document.getElementById('menu-overlay').classList.remove('active');
         }
 
-        /* 🔍 DYNAMIC TAB SWITCHING WITH ZOOM-IN SCALE ANIMATION */
         function switchTab(evt, tabId) {
             const container = evt.target.closest('.slide');
             container.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -1083,7 +1086,6 @@ for col in numeric_columns:
             targetContent.classList.add('active');
         }
 
-        /* 🔍 FULLSCREEN ZOOM MODAL CONTROLS */
         function openZoomModal(title, content) {
             document.getElementById('zoom-modal-title').innerHTML = '🔍 ' + title;
             document.getElementById('zoom-modal-body').innerHTML = content;
@@ -1109,7 +1111,6 @@ for col in numeric_columns:
             dotsContainer.appendChild(dot);
         }
 
-        // Spotlight mouse tracking
         document.addEventListener('mousemove', (e) => {
             document.querySelectorAll('.card').forEach(card => {
                 const rect = card.getBoundingClientRect();
