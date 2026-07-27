@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Starbucks Presentation Explanation Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: A4;
+            margin: 1.5cm;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #1e293b;
+            padding: 2rem;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .header-doc {
+            border-bottom: 3px solid #00704A;
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 26px;
+            color: #00704A;
+            font-weight: 800;
+        }
+
+        .header-title p {
+            font-size: 14px;
+            color: #64748b;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        .badge-doc {
+            background-color: #00704A;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .slide-block {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 5px solid #00704A;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.8rem;
+            page-break-inside: avoid;
+        }
+
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .slide-num {
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: #00704A;
+        }
+
+        .script-box {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 1.1rem;
+            margin: 0.8rem 0;
+            font-style: italic;
+            color: #334155;
+        }
+
+        .script-box strong {
+            font-style: normal;
+            color: #0f172a;
+        }
+
+        .points-list {
+            margin-top: 0.8rem;
+            padding-left: 1.2rem;
+        }
+
+        .points-list li {
+            margin-bottom: 0.4rem;
+            color: #334155;
+        }
+
+        .points-list li strong {
+            color: #00704A;
+        }
+
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 12px;
+            color: #94a3b8;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-doc">
+        <div class="header-title">
+            <h1>☕ Starbucks Beverage Nutrition Facts</h1>
+            <p>Slide-by-Slide Presenter Notes & Script</p>
+        </div>
+        <div class="badge-doc">Official Presenter Guide</div>
+    </div>
+
+    <!-- Slide 1 -->
+    <div class="slide-block">
+        <div class="slide-header">
+            <span class="slide-num">📍 SLIDE 1: Dataset Title & Scope</span>
+        </div>
+        <div class="script-box">
+            <strong>🗣️ Presenter Script (What to say):</strong><br>
+            "Good day everyone! Today, I will present our data cleaning and nutritional analysis project on the <strong>Starbucks Beverage Nutrition Facts</strong> dataset. The primary objective of this project is to perform comprehensive data profiling, identify quality anomalies, execute systematic data cleaning, and analyze the nutritional content of <strong>242 handcrafted Starbucks beverages</strong> across 9 distinct drink categories. By the end of this presentation, you will see how raw, polluted data was transformed into a 100% clean, standardized dataset ready for analytical reporting."
+        </div>
+        <ul class="points-list">
+            <li><strong>Dataset Scope:</strong> 242 beverage recipe rows across size (Short, Tall, Grande, Venti) and milk choices (Nonfat, 2% Milk, Soy, Whole).</li>
+            <li><strong>Feature Count:</strong> 18 nutritional features including Calories, Total Fat, Trans Fat, Sodium, Carbohydrates, Fiber, Sugars, Protein, and Caffeine.</li>
+            <li><strong>Drink Categories:</strong> 9 categories including Coffee, Classic Espresso, Signature Espresso, Frappuccino® Blended Coffee, Frappuccino® Light, Frappuccino® Crème, Tazo® Tea, Shaken Iced Beverages, and Smoothies.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide-block">
+        <div class="slide-header">
+            <span class="slide-num">📥 SLIDE 2: How the Data Was Acquired</span>
+        </div>
+        <div class="script-box">
+            <strong>🗣️ Presenter Script (What to say):</strong><br>
+            "To begin our workflow, let me explain how this dataset was acquired and imported. The original raw dataset was obtained from <strong>Starbucks Corporation's official Nutritional Guidance menu disclosures</strong>, archived publicly on open data repositories like Kaggle. In our Google Colab environment, we imported the file using Python's <code>google.colab.files.upload()</code> module. We then ingested the Excel file directly into a Pandas DataFrame using <code>pd.read_excel('StarBucksNutritionFacts.csv.xlsx')</code>. Upon initial loading, the DataFrame comprised 242 rows and 18 columns, giving us our baseline for data auditing."
+        </div>
+        <ul class="points-list">
+            <li><strong>Data Source:</strong> Official public nutritional disclosures from Starbucks Corporation.</li>
+            <li><strong>Google Colab Workflow:</strong> Interactive file upload handling local file loading inside remote Linux virtual instances.</li>
+            <li><strong>Pandas Integration:</strong> <code>pd.read_excel()</code> parsed the workbook structure into a structured tabular DataFrame.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide-block">
+        <div class="slide-header">
+            <span class="slide-num">📊 SLIDE 3: Present Dataset (Raw Overview)</span>
+        </div>
+        <div class="script-box">
+            <strong>🗣️ Presenter Script (What to say):</strong><br>
+            "Now let's examine our raw dataset overview and discuss the specific data quality issues we uncovered during initial data profiling. As shown in this table, while most numeric columns loaded correctly, we identified <strong>three major data pollution issues</strong>: 1. Whitespace Pollution in headers, 2. Typographical Error in Fat Content at Row 237 ('3 2' with a space), and 3. Missing and Text Caffeine Values ('Varies' and NaN)."
+        </div>
+        <ul class="points-list">
+            <li><strong>Initial Dimensions:</strong> 242 rows &times; 18 columns.</li>
+            <li><strong>Data Type Corruption:</strong> Text strings like <code>'3 2'</code> and <code>'Varies'</code> trapped entire columns as <code>object</code> text data types.</li>
+            <li><strong>Issue Badges:</strong> Whitespace padding, Typo <code>'3 2'</code>, and <code>'Varies'</code> / <code>NaN</code> placeholders.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="slide-block">
+        <div class="slide-header">
+            <span class="slide-num">🧹 SLIDE 4: Processes Used to Clean the Data</span>
+        </div>
+        <div class="script-box">
+            <strong>🗣️ Presenter Script (What to say):</strong><br>
+            "To resolve these anomalies, we followed a systematic four-step data cleaning process: Step 1: Missing Data Audit & Imputation using category medians, Step 2: Typo Repair ('3 2' &rarr; '3.2'), Step 3: Duplicate Verification (0 duplicates), and Step 4: Whitespace Trimming."
+        </div>
+        <ul class="points-list">
+            <li><strong>Category Median Imputation:</strong> Imputing caffeine by drink category preserves realistic caffeination profiles (e.g., espresso vs herbal tea) without distorting global menu averages.</li>
+            <li><strong>Type Conversion:</strong> Explicitly converting object types to <code>float64</code> restores full mathematical compatibility.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="slide-block">
+        <div class="slide-header">
+            <span class="slide-num">🛠️ SLIDE 5: Tools or Methods Used to Clean It</span>
+        </div>
+        <div class="script-box">
+            <strong>🗣️ Presenter Script (What to say):</strong><br>
+            "Here on Slide 5, we highlight the technical stack and executable Python pipeline used to execute the cleaning process. We utilized <strong>Python 3</strong>, <strong>Pandas</strong>, <strong>NumPy</strong>, and <strong>Google Colab</strong> as our cloud execution engine. The code snippet shown here summarizes our entire automated pipeline."
+        </div>
+        <ul class="points-list">
+            <li><strong>Tool Stack:</strong> Python 3, Pandas, NumPy, Scikit-Learn, Google Colab.</li>
+            <li><strong>Reproducible Pipeline:</strong> Re-running this script takes raw dirty data and outputs a 100% standardized clean CSV in under 2 seconds.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 6 -->
+    <div class="slide-block">
+        <div class="slide-header">
+            <span class="slide-num">✨ SLIDE 6: After Cleaning (Post-Cleaned Data)</span>
+        </div>
+        <div class="script-box">
+            <strong>🗣️ Presenter Script (What to say):</strong><br>
+            "This slide presents our post-cleaned dataset and summary statistics. After cleaning, we have <strong>242 complete rows with zero missing values</strong>. Calories range from 0 to 510 kcal (average 193.9 kcal), Sugars average 33.0g, and Caffeine averages 87.6 mg."
+        </div>
+        <ul class="points-list">
+            <li><strong>Cleaned Record Count:</strong> 242 rows (100% retained, 0 rows dropped).</li>
+            <li><strong>Nutritional Summary:</strong> Mean Calories = 193.87 kcal, Mean Sugars = 32.96 g, Mean Caffeine = 87.58 mg.</li>
+            <li><strong>Interactive Link:</strong> Lower-left button jumps back to Slide 3 for raw vs cleaned comparison.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 7 -->
+    <div class="slide-block">
+        <div class="slide-header">
+            <span class="slide-num">🎯 SLIDE 7: Conclusion & Key Findings</span>
+        </div>
+        <div class="script-box">
+            <strong>🗣️ Presenter Script (What to say):</strong><br>
+            "In conclusion, our data cleaning and analysis produced two main outcomes: 1. Data Cleaning Success (100% numeric data integrity restored), and 2. Nutritional Takeaways (Frappuccino® Blended Coffee & Smoothies carry the highest sugar/calorie load, while Brewed Coffee delivers peak caffeine)."
+        </div>
+        <ul class="points-list">
+            <li><strong>Quality Outcome:</strong> Zero null values, standardized numeric types across 18 features.</li>
+            <li><strong>Consumer Insight:</strong> High calories/sugars concentrated in blended frozen drinks; high caffeine concentrated in plain brewed coffee.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 8 -->
+    <div class="slide-block">
+        <div class="slide-header">
+            <span class="slide-num">🎉 SLIDE 8: Thank You!</span>
+        </div>
+        <div class="script-box">
+            <strong>🗣️ Presenter Script (What to say):</strong><br>
+            "That brings us to the end of our presentation! Thank you very much for your time and attention. I am now open to any questions or feedback regarding our data cleaning methodology and findings!"
+        </div>
+        <ul class="points-list">
+            <li><strong>Q&A Readiness:</strong> Press 'Restart Presentation' or use the sidebar menu to revisit any specific slide during Q&A!</li>
+        </ul>
+    </div>
+
+    <footer>
+        Starbucks Beverage Nutrition Facts Presentation &bull; Presenter Notes & Script Document &bull; Generated July 2026
+    </footer>
+
+</body>
+</html>
