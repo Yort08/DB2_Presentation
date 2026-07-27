@@ -1,13 +1,13 @@
-# 🎤 Starbucks Beverage Nutrition Facts Presentation
+# 🎤 Nutrition Facts for Starbucks Menu Presentation
 ## Slide-by-Slide Presenter Script & Detailed Explanation Notes
 
 ---
 
 ### 📍 SLIDE 1: Dataset Title & Scope
-**Slide Title:** *Starbucks Beverage Nutrition Facts*
+**Slide Title:** *Nutrition Facts for Starbucks Menu*
 
 #### 🗣️ Presenter Script (What to say):
-> *"Good day everyone! Today, I will present our data cleaning and nutritional analysis project on the **Starbucks Beverage Nutrition Facts** dataset. 
+> *"Good day everyone! Today, I will present our data cleaning and nutritional analysis project on the **Nutrition Facts for Starbucks Menu** dataset. 
 > The primary objective of this project is to perform comprehensive data profiling, identify quality anomalies, execute systematic data cleaning, and analyze the nutritional content of **242 handcrafted Starbucks beverages** across 9 distinct drink categories. 
 > By the end of this presentation, you will see how raw, polluted data was transformed into a 100% clean, standardized dataset ready for analytical reporting."*
 
