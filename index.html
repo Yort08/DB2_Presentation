@@ -128,13 +128,13 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        /* 100% Full Width Slide Container with Touch Support */
+        /* 100% Full Width Slide Container */
         .slide {
             position: absolute;
             width: calc(100vw - 2rem) !important;
             height: calc(100vh - 150px) !important;
             max-width: 100% !important;
-            overflow-y: scroll !important;
+            overflow-y: auto !important;
             padding: 2.2rem 3rem;
             background: var(--bg-card);
             border: 2px solid var(--border);
@@ -403,39 +403,6 @@
             box-shadow: 0 0 35px rgba(56, 189, 248, 0.8);
         }
 
-        /* Floating Touch Scroll Buttons for Tablets */
-        .tablet-scroll-buttons {
-            position: fixed;
-            right: 2rem;
-            bottom: 6rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            z-index: 500;
-        }
-
-        .btn-touch-scroll {
-            background: rgba(13, 22, 39, 0.9);
-            border: 2px solid var(--sb-light-green);
-            color: #ffffff;
-            width: 3.5rem;
-            height: 3.5rem;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 900;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(0, 168, 98, 0.5);
-            transition: all 0.2s ease;
-        }
-
-        .btn-touch-scroll:active, .btn-touch-scroll:hover {
-            background: var(--sb-light-green);
-            transform: scale(1.1);
-        }
-
         /* Fullscreen Zoom Modal */
         .zoom-modal {
             position: fixed;
@@ -558,10 +525,10 @@
             width: 100%;
         }
 
-        /* Controls Bar */
+        /* Enhanced Controls Bar with Dedicated Scroll Up/Down Buttons */
         footer.controls-bar {
             height: 70px;
-            padding: 0 3rem;
+            padding: 0 2rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -570,6 +537,35 @@
             backdrop-filter: blur(16px);
             z-index: 100;
             flex-shrink: 0;
+        }
+
+        .control-group-left, .control-group-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn-scroll-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: linear-gradient(135deg, rgba(0, 168, 98, 0.25), rgba(15, 26, 46, 0.95));
+            border: 2px solid var(--sb-light-green);
+            color: #ffffff;
+            padding: 0.75rem 1.4rem;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1.15rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(0, 168, 98, 0.35);
+        }
+
+        .btn-scroll-action:hover, .btn-scroll-action:active {
+            background: var(--sb-light-green);
+            color: #ffffff;
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 0 25px rgba(0, 168, 98, 0.7);
         }
 
         .btn {
@@ -716,7 +712,8 @@
             .tab-btn { font-size: 1.1rem; padding: 0.8rem 1.2rem; }
             .thank-you-hero-title { font-size: 3.5rem; }
             .thank-you-subtitle { font-size: 1.4rem; }
-            .tablet-scroll-buttons { display: none; }
+            footer.controls-bar { padding: 0 1rem; }
+            .btn-scroll-action span { display: none; }
         }
     </style>
 </head>
@@ -748,12 +745,6 @@
         <div class="menu-item" onclick="goToSlide(6)"><span>6.</span> After Cleaning Data</div>
         <div class="menu-item" onclick="goToSlide(7)"><span>7.</span> Conclusion & Findings</div>
         <div class="menu-item" onclick="goToSlide(8)"><span>8.</span> 🎉 Thank You!</div>
-    </div>
-
-    <!-- Floating Touch Scroll Buttons for Tablets -->
-    <div class="tablet-scroll-buttons">
-        <button class="btn-touch-scroll" onclick="scrollActiveSlide(-200)" title="Scroll Up">▲</button>
-        <button class="btn-touch-scroll" onclick="scrollActiveSlide(200)" title="Scroll Down">▼</button>
     </div>
 
     <!-- Zoom Modal -->
@@ -1110,9 +1101,17 @@ for col in numeric_columns:
     </main>
 
     <footer class="controls-bar">
-        <button class="btn btn-secondary" id="prev-btn" onclick="changeSlide(-1)">← Previous</button>
+        <div class="control-group-left">
+            <button class="btn btn-secondary" id="prev-btn" onclick="changeSlide(-1)">← Previous</button>
+            <button class="btn-scroll-action" onclick="scrollActiveSlide(-250)" title="Scroll Active Slide Up">▲ <span>Up</span></button>
+            <button class="btn-scroll-action" onclick="scrollActiveSlide(250)" title="Scroll Active Slide Down">▼ <span>Down</span></button>
+        </div>
+
         <div style="display:flex; gap:0.8rem;" id="dot-indicators"></div>
-        <button class="btn btn-primary" id="next-btn" onclick="changeSlide(1)">Next →</button>
+
+        <div class="control-group-right">
+            <button class="btn btn-primary" id="next-btn" onclick="changeSlide(1)">Next →</button>
+        </div>
     </footer>
 
     <script>
