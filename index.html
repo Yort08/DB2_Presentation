@@ -27,7 +27,6 @@
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
-            user-select: none;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -38,11 +37,14 @@
             width: 100vw;
             overflow: hidden;
             font-size: 18px;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
         body {
             display: flex;
             flex-direction: column;
+            user-select: text;
         }
 
         /* App Header */
@@ -111,7 +113,7 @@
             font-family: 'Outfit', sans-serif;
         }
 
-        /* Edge-to-Edge 100% Full Width Viewport */
+        /* 100% Full Width Viewport */
         main.viewport {
             flex: 1;
             position: relative;
@@ -122,15 +124,17 @@
             width: 100vw;
             height: calc(100vh - 135px);
             overflow: hidden;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
         }
 
-        /* 100% Full Width Slide Container */
+        /* 100% Full Width Slide Container with Touch Support */
         .slide {
             position: absolute;
             width: calc(100vw - 2rem) !important;
             height: calc(100vh - 150px) !important;
             max-width: 100% !important;
-            overflow-y: auto;
+            overflow-y: scroll !important;
             padding: 2.2rem 3rem;
             background: var(--bg-card);
             border: 2px solid var(--border);
@@ -141,8 +145,9 @@
             transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
             display: none;
-            touch-action: pan-y;
-            -webkit-overflow-scrolling: touch;
+            touch-action: pan-y !important;
+            -webkit-overflow-scrolling: touch !important;
+            user-select: text;
         }
 
         .slide.active {
@@ -396,6 +401,39 @@
             color: #070d19;
             transform: translateY(-3px) scale(1.04);
             box-shadow: 0 0 35px rgba(56, 189, 248, 0.8);
+        }
+
+        /* Floating Touch Scroll Buttons for Tablets */
+        .tablet-scroll-buttons {
+            position: fixed;
+            right: 2rem;
+            bottom: 6rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            z-index: 500;
+        }
+
+        .btn-touch-scroll {
+            background: rgba(13, 22, 39, 0.9);
+            border: 2px solid var(--sb-light-green);
+            color: #ffffff;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0, 168, 98, 0.5);
+            transition: all 0.2s ease;
+        }
+
+        .btn-touch-scroll:active, .btn-touch-scroll:hover {
+            background: var(--sb-light-green);
+            transform: scale(1.1);
         }
 
         /* Fullscreen Zoom Modal */
@@ -678,6 +716,7 @@
             .tab-btn { font-size: 1.1rem; padding: 0.8rem 1.2rem; }
             .thank-you-hero-title { font-size: 3.5rem; }
             .thank-you-subtitle { font-size: 1.4rem; }
+            .tablet-scroll-buttons { display: none; }
         }
     </style>
 </head>
@@ -709,6 +748,12 @@
         <div class="menu-item" onclick="goToSlide(6)"><span>6.</span> After Cleaning Data</div>
         <div class="menu-item" onclick="goToSlide(7)"><span>7.</span> Conclusion & Findings</div>
         <div class="menu-item" onclick="goToSlide(8)"><span>8.</span> 🎉 Thank You!</div>
+    </div>
+
+    <!-- Floating Touch Scroll Buttons for Tablets -->
+    <div class="tablet-scroll-buttons">
+        <button class="btn-touch-scroll" onclick="scrollActiveSlide(-200)" title="Scroll Up">▲</button>
+        <button class="btn-touch-scroll" onclick="scrollActiveSlide(200)" title="Scroll Down">▼</button>
     </div>
 
     <!-- Zoom Modal -->
@@ -1078,6 +1123,7 @@ for col in numeric_columns:
             document.querySelectorAll('.slide').forEach((slide, idx) => {
                 if (idx + 1 === currentSlide) {
                     slide.classList.add('active');
+                    slide.scrollTop = 0;
                 } else {
                     slide.classList.remove('active');
                 }
@@ -1122,6 +1168,13 @@ for col in numeric_columns:
             document.getElementById('menu-overlay').classList.remove('active');
         }
 
+        function scrollActiveSlide(amount) {
+            const activeSlide = document.querySelector('.slide.active');
+            if (activeSlide) {
+                activeSlide.scrollBy({ top: amount, behavior: 'smooth' });
+            }
+        }
+
         function switchTab(evt, tabId) {
             const container = evt.target.closest('.slide');
             container.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -1147,6 +1200,25 @@ for col in numeric_columns:
                 closeZoomModal();
             }
         });
+
+        // Touch Swipe Gesture Fallback Handler for Tablet Displays
+        let startY = 0;
+        let startX = 0;
+        document.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY;
+            startX = e.touches[0].clientX;
+        }, { passive: true });
+
+        document.addEventListener('touchmove', (e) => {
+            if (!startY) return;
+            const currentY = e.touches[0].clientY;
+            const diffY = startY - currentY;
+            const activeSlide = document.querySelector('.slide.active');
+            
+            if (activeSlide) {
+                activeSlide.scrollTop += diffY * 0.5;
+            }
+        }, { passive: true });
 
         const dotsContainer = document.getElementById('dot-indicators');
         for (let i = 1; i <= totalSlides; i++) {
